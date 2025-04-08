@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+  <id>FCMServer</id>
+  <name>Firebase FCM Server</name>
+  <description>Runs the Firebase FCM server as a Windows service</description>
+  <executable>java</executable>
+  <arguments>-jar "%BASE%\build\libs\server-1.0-SNAPSHOT.jar"</arguments>
+  <logmode>rotate</logmode>
+</service>

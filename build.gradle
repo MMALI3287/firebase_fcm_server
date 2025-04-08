@@ -1,9 +1,13 @@
 plugins {
     id 'java'
+    id 'application'  // Add application plugin
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+// Set the base name of the JAR file to ensure consistency
+archivesBaseName = 'server'
 
 repositories {
     mavenCentral()
@@ -24,4 +28,20 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+// Define the main class for the application
+mainClassName = 'com.flutter.fcm.server.FcmSender'
+
+// Task to create a fat JAR with all dependencies
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.flutter.fcm.server.FcmSender'
+    }
+    
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
